@@ -8,10 +8,7 @@ import com.example.jpa.user.entity.User;
 import com.example.jpa.user.exception.ExistEmailException;
 import com.example.jpa.user.exception.PasswordNotMatchException;
 import com.example.jpa.user.exception.UserNotFoundException;
-import com.example.jpa.user.model.UserInput;
-import com.example.jpa.user.model.UserInputPassword;
-import com.example.jpa.user.model.UserResponse;
-import com.example.jpa.user.model.UserUpdate;
+import com.example.jpa.user.model.*;
 import com.example.jpa.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.apache.coyote.Response;
@@ -233,5 +230,16 @@ public class ApiUserController {
         }
 
         return ResponseEntity.ok().build();
+    }
+
+    // Q40
+    @GetMapping("/api/user")
+    public ResponseEntity<?> findUser(@RequestBody UserInputFind userInputFind) {
+        User user = userRepository.findByUserNameAndPhone(userInputFind.getUserName(), userInputFind.getPhone())
+                .orElseThrow(() -> new UserNotFoundException("사용자 정보가 없습니다."));
+
+        UserResponse userResponse = UserResponse.of(user);
+
+        return ResponseEntity.ok().body(userResponse);
     }
 }
