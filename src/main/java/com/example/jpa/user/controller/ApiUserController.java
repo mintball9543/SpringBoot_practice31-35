@@ -1,6 +1,9 @@
 package com.example.jpa.user.controller;
 
+import com.example.jpa.notice.entity.Notice;
+import com.example.jpa.notice.model.NoticeResponse;
 import com.example.jpa.notice.model.ResponseError;
+import com.example.jpa.notice.repository.NoticeRepository;
 import com.example.jpa.user.entity.User;
 import com.example.jpa.user.exception.UserNotFoundException;
 import com.example.jpa.user.model.UserInput;
@@ -25,6 +28,7 @@ import java.util.List;
 public class ApiUserController {
 
     private final UserRepository userRepository;
+    private  final NoticeRepository noticeRepository;
 
 
     // Q31
@@ -100,5 +104,20 @@ public class ApiUserController {
         UserResponse userResponse = UserResponse.of(user);
 
         return userResponse;
+    }
+
+    @GetMapping("/api/user/{id}/notice")
+    public List<NoticeResponse> userNotice(@PathVariable Long id) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new UserNotFoundException("사용자 정보가 없습니다."));
+
+        List<Notice> noticeList = noticeRepository.findByUser(user);
+
+        List<NoticeResponse> noticeResponseList = new ArrayList<>();
+        noticeList.stream().forEach(e -> {
+            noticeResponseList.add(NoticeResponse.of(e));
+        });
+
+        return noticeResponseList;
     }
 }
