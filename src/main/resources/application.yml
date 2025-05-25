@@ -9,13 +9,13 @@ spring:
     url: jdbc:h2:mem:backofficeDb
     #url: jdbc:h2:file:/Users/parkkyutae/Documents/sources/github/fastcampus-demo-01/record-example/sample1/backofficeDb
     driver-class-name: org.h2.Driver
-    username: root
+    username: sa
     password: '1111'
 
   jpa:
     hibernate:
-      ddl-auto: none
-    generate-ddl: false
+      ddl-auto: create-drop
+    generate-ddl: true
 
     properties:
       format_sql: true
