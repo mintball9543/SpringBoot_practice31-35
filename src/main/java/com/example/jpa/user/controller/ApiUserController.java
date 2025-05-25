@@ -1,8 +1,10 @@
 package com.example.jpa.user.controller;
 
 import com.example.jpa.notice.entity.Notice;
+import com.example.jpa.notice.entity.NoticeLike;
 import com.example.jpa.notice.model.NoticeResponse;
 import com.example.jpa.notice.model.ResponseError;
+import com.example.jpa.notice.repository.NoticeLikeRepository;
 import com.example.jpa.notice.repository.NoticeRepository;
 import com.example.jpa.user.entity.User;
 import com.example.jpa.user.exception.ExistEmailException;
@@ -11,10 +13,7 @@ import com.example.jpa.user.exception.UserNotFoundException;
 import com.example.jpa.user.model.*;
 import com.example.jpa.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import net.bytebuddy.implementation.bind.MethodDelegationBinder;
-import org.apache.coyote.Response;
 import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -34,7 +33,7 @@ public class ApiUserController {
 
     private final UserRepository userRepository;
     private  final NoticeRepository noticeRepository;
-
+    private final NoticeLikeRepository noticeLikeRepository;
 
     // Q31
 //    @PostMapping("/api/user")
@@ -270,5 +269,16 @@ public class ApiUserController {
 
     void sendSMS(String message){
         System.out.println("문자 발송 : " + message);
+    }
+
+
+    // Q42
+    @GetMapping
+    public List<NoticeLike> likeNotice(@PathVariable Long id){
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new UserNotFoundException("사용자 정보가 없습니다."));
+
+        List<NoticeLike> noticeLikeList = noticeLikeRepository.findByUser(user);
+        return noticeLikeList;
     }
 }
