@@ -11,6 +11,7 @@ import com.example.jpa.user.exception.UserNotFoundException;
 import com.example.jpa.user.model.*;
 import com.example.jpa.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import net.bytebuddy.implementation.bind.MethodDelegationBinder;
 import org.apache.coyote.Response;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpEntity;
@@ -25,6 +26,7 @@ import javax.validation.Valid;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @RequiredArgsConstructor
 @RestController
@@ -241,5 +243,32 @@ public class ApiUserController {
         UserResponse userResponse = UserResponse.of(user);
 
         return ResponseEntity.ok().body(userResponse);
+    }
+
+    // Q41
+    private String getResetPassword() {
+        String uuid = UUID.randomUUID().toString();
+        return uuid.replace("-", "").substring(0, 10);
+    }
+
+    @GetMapping("/api/user/{id}/password/reset")
+    public ResponseEntity<?> resetUserPassword(@PathVariable Long id) {
+
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new UserNotFoundException("사용자 정보가 없습니다."));
+
+        String resetPassword = getResetPassword();
+        String encryptPassword = getEncryptPassword(resetPassword);
+        user.setPassword(encryptPassword);
+        userRepository.save(user);
+
+        String message = String.format("[%s]님의 임시 비밀번호가 발급되었습니다. 비밀번호 : %s", user.getUserName(), resetPassword);
+        sendSMS(message);
+
+        return ResponseEntity.ok().build();
+    }
+
+    void sendSMS(String message){
+        System.out.println("문자 발송 : " + message);
     }
 }
