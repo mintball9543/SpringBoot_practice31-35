@@ -2,13 +2,13 @@ package com.example.jpa.user.controller;
 
 import com.example.jpa.notice.repository.NoticeRepository;
 import com.example.jpa.user.entity.User;
+import com.example.jpa.user.entity.UserLoginHistory;
 import com.example.jpa.user.model.ResponseMessage;
-import com.example.jpa.user.model.ResponseMessageHeader;
 import com.example.jpa.user.model.UserSearch;
 import com.example.jpa.user.model.UserStatusInput;
+import com.example.jpa.user.repository.UserLoginHistoryRepository;
 import com.example.jpa.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +21,7 @@ import java.util.Optional;
 public class ApiAdminUserController {
     private final UserRepository userRepository;
     private final NoticeRepository noticeRepository;
+    private final UserLoginHistoryRepository userLoginHistoryRepository;
 
     // Q48
 //    @GetMapping("/api/admin/user")
@@ -89,6 +90,15 @@ public class ApiAdminUserController {
 
         userRepository.delete(user);
         return ResponseEntity.ok().build();
+    }
+
+    // Q53
+    @GetMapping("/api/admin/user/login/history")
+    public ResponseEntity<?> userLoginHistory() {
+
+        List<UserLoginHistory> userLoginHistories = userLoginHistoryRepository.findAll();
+
+        return ResponseEntity.ok().body(userLoginHistories);
     }
 
 }
