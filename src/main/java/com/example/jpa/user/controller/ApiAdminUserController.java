@@ -6,8 +6,10 @@ import com.example.jpa.user.entity.UserLoginHistory;
 import com.example.jpa.user.model.ResponseMessage;
 import com.example.jpa.user.model.UserSearch;
 import com.example.jpa.user.model.UserStatusInput;
+import com.example.jpa.user.model.UserSummary;
 import com.example.jpa.user.repository.UserLoginHistoryRepository;
 import com.example.jpa.user.repository.UserRepository;
+import com.example.jpa.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +24,7 @@ public class ApiAdminUserController {
     private final UserRepository userRepository;
     private final NoticeRepository noticeRepository;
     private final UserLoginHistoryRepository userLoginHistoryRepository;
+    private final UserService userService;
 
     // Q48
 //    @GetMapping("/api/admin/user")
@@ -142,5 +145,15 @@ public class ApiAdminUserController {
 
         return ResponseEntity.ok().body(ResponseMessage.success());
     }
+
+    // Q56
+    @GetMapping("/api/admin/user/status/count")
+    public ResponseEntity<?> userStatusCount() {
+
+        UserSummary userSummary = userService.getUserStatusCount();
+
+        return ResponseEntity.ok().body(ResponseMessage.success(userSummary));
+    }
+
 
 }

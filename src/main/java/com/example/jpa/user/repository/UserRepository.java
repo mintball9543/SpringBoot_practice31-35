@@ -1,6 +1,7 @@
 package com.example.jpa.user.repository;
 
 import com.example.jpa.user.entity.User;
+import com.example.jpa.user.model.UserStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -28,4 +29,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findByEmail(String email);
 
     List<User> findByEmailContainsOrPhoneContainsOrUserNameContains(String email, String phone, String userName);
+
+    long countByStatus(UserStatus userStatus);
 }
