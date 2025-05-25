@@ -1,6 +1,7 @@
 package com.example.jpa.user.service;
 
 import com.example.jpa.user.entity.User;
+import com.example.jpa.user.model.UserLogCount;
 import com.example.jpa.user.model.UserNoticeCount;
 import com.example.jpa.user.model.UserStatus;
 import com.example.jpa.user.model.UserSummary;
@@ -48,6 +49,12 @@ public class UserServiceImpl implements UserService {
 
         return userCustomRepository.findUserNoticeCount();
 
+    }
+
+    @Override
+    public List<UserLogCount> getUserLogCount() {
+
+        return userCustomRepository.findUserLogCount();
     }
 
 

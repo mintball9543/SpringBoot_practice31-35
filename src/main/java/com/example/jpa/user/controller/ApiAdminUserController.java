@@ -170,5 +170,13 @@ public class ApiAdminUserController {
         return ResponseEntity.ok().body(ResponseMessage.success(userNoticeCountList));
     }
 
+    // Q59
+    @GetMapping("/api/admin/user/log/count")
+    public ResponseEntity<?> userLogCount() {
+
+        List<UserLogCount> userLogCounts = userService.getUserLogCount();
+
+        return ResponseEntity.ok().body(ResponseMessage.success(userLogCounts));
+    }
 
 }
