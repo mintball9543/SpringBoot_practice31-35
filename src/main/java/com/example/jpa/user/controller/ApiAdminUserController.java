@@ -3,10 +3,7 @@ package com.example.jpa.user.controller;
 import com.example.jpa.notice.repository.NoticeRepository;
 import com.example.jpa.user.entity.User;
 import com.example.jpa.user.entity.UserLoginHistory;
-import com.example.jpa.user.model.ResponseMessage;
-import com.example.jpa.user.model.UserSearch;
-import com.example.jpa.user.model.UserStatusInput;
-import com.example.jpa.user.model.UserSummary;
+import com.example.jpa.user.model.*;
 import com.example.jpa.user.repository.UserLoginHistoryRepository;
 import com.example.jpa.user.repository.UserRepository;
 import com.example.jpa.user.service.UserService;
@@ -162,6 +159,15 @@ public class ApiAdminUserController {
         List<User> users = userService.getTodayUsers();
 
         return ResponseEntity.ok().body(ResponseMessage.success(users));
+    }
+
+    // Q58
+    @GetMapping("/api/admin/user/notice/count")
+    public ResponseEntity<?> userNoticeCount() {
+
+        List<UserNoticeCount> userNoticeCountList = userService.getUserNoticeCount();
+
+        return ResponseEntity.ok().body(ResponseMessage.success(userNoticeCountList));
     }
 
 
