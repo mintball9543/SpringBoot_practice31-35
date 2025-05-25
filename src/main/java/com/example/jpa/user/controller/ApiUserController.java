@@ -16,6 +16,7 @@ import com.example.jpa.user.exception.PasswordNotMatchException;
 import com.example.jpa.user.exception.UserNotFoundException;
 import com.example.jpa.user.model.*;
 import com.example.jpa.user.repository.UserRepository;
+import com.example.jpa.util.JWTUtils;
 import com.example.jpa.util.PasswordUtils;
 import jdk.vm.ci.meta.Local;
 import lombok.RequiredArgsConstructor;
@@ -376,5 +377,21 @@ public class ApiUserController {
                 .sign(Algorithm.HMAC512("fastcampus".getBytes()));
 
         return ResponseEntity.ok().body(UserLoginToken.builder().token(newToken).build());
+    }
+
+    // Q47
+    @DeleteMapping("/api/user/login")
+    public ResponseEntity<?> removeToken(@RequestHeader("F-TOKEN") String token){
+        String email = "";
+
+        try{
+            email = JWTUtils.getIssuer(token);
+        } catch (SignatureVerificationException | JWTDecodeException e) {
+            return new ResponseEntity<>("비밀번호가 일치하지 않습니다.", HttpStatus.BAD_REQUEST);
+        }
+
+        // 토큰 삭제 로직은 애매하므로 기간을 설정하거나 횟수 제한을 둔다.
+
+        return ResponseEntity.ok().build();
     }
 }
