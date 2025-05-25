@@ -15,6 +15,7 @@ import com.example.jpa.user.exception.UserNotFoundException;
 import com.example.jpa.user.model.*;
 import com.example.jpa.user.repository.UserRepository;
 import com.example.jpa.util.PasswordUtils;
+import jdk.vm.ci.meta.Local;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
@@ -308,7 +309,7 @@ public class ApiUserController {
 //    }
 
 
-    // Q44
+    // Q44~45
     @PostMapping("/api/user/login")
     public ResponseEntity<?> createToken(@RequestBody @Valid UserLogin userLogin, Errors errors){
         if(errors.hasErrors()){
@@ -326,8 +327,11 @@ public class ApiUserController {
             throw new PasswordNotMatchException("비밀번호가 일치하지 않습니다.");
 
         // 토큰
+        LocalDateTime expiredDateTime = LocalDateTime.now().plusMonths(1);
+        Date expiredDate = java.sql.Timestamp.valueOf(expiredDateTime);
+
         String token = JWT.create()
-                .withExpiresAt(new Date())
+                .withExpiresAt(expiredDate)
                 .withClaim("user_id",user.getId())
                 .withSubject(user.getUserName())
                 .withIssuer(user.getEmail())
@@ -336,4 +340,6 @@ public class ApiUserController {
 
         return ResponseEntity.ok().body(UserLoginToken.builder().token(token).build());
     }
+
+
 }
