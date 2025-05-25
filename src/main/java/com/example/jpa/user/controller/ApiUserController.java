@@ -1,5 +1,7 @@
 package com.example.jpa.user.controller;
 
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.algorithms.Algorithm;
 import com.example.jpa.notice.entity.Notice;
 import com.example.jpa.notice.entity.NoticeLike;
 import com.example.jpa.notice.model.NoticeResponse;
@@ -25,6 +27,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -284,6 +287,28 @@ public class ApiUserController {
     }
 
     // Q43
+//    @PostMapping("/api/user/login")
+//    public ResponseEntity<?> createToken(@RequestBody @Valid UserLogin userLogin, Errors errors){
+//        if(errors.hasErrors()){
+//            List<ResponseError> responseErrorList = new ArrayList<>();
+//            errors.getAllErrors().forEach((e) -> {
+//                responseErrorList.add(ResponseError.of((FieldError) e));
+//            });
+//            return new ResponseEntity<>(responseErrorList, HttpStatus.BAD_REQUEST);
+//        }
+//
+//        User user = userRepository.findByEmail(userLogin.getEmail())
+//                .orElseThrow(() -> new UserNotFoundException("사용자 정보가 없습니다."));
+//
+//        if(PasswordUtils.equalPassword(userLogin.getPassword(), user.getPassword()) == false)
+//            throw new PasswordNotMatchException("비밀번호가 일치하지 않습니다.");
+//
+//        return ResponseEntity.ok().build();
+//
+//    }
+
+
+    // Q44
     @PostMapping("/api/user/login")
     public ResponseEntity<?> createToken(@RequestBody @Valid UserLogin userLogin, Errors errors){
         if(errors.hasErrors()){
@@ -300,7 +325,15 @@ public class ApiUserController {
         if(PasswordUtils.equalPassword(userLogin.getPassword(), user.getPassword()) == false)
             throw new PasswordNotMatchException("비밀번호가 일치하지 않습니다.");
 
-        return ResponseEntity.ok().build();
+        // 토큰
+        String token = JWT.create()
+                .withExpiresAt(new Date())
+                .withClaim("user_id",user.getId())
+                .withSubject(user.getUserName())
+                .withIssuer(user.getEmail())
+                .sign(Algorithm.HMAC512("fastcampus".getBytes()));
 
+
+        return ResponseEntity.ok().body(UserLoginToken.builder().token(token).build());
     }
 }
