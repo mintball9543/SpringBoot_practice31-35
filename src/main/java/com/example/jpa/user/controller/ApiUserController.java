@@ -18,6 +18,7 @@ import org.apache.coyote.Response;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.validation.Errors;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
@@ -126,39 +127,40 @@ public class ApiUserController {
         return noticeResponseList;
     }
 
-    @PostMapping("/api/user")
-    public ResponseEntity<?> addUser(@RequestBody @Valid UserInput userInput, Errors errors){
-        List<ResponseError> responseErrorList = new ArrayList<>();
-        if(errors.hasErrors()){
-            errors.getAllErrors().stream().forEach((e)->{
-                responseErrorList.add(ResponseError.of((FieldError)e));
-            });
-            return new ResponseEntity<>(responseErrorList, HttpStatus.BAD_REQUEST);
-        }
-
-        if(userRepository.countByEmail(userInput.getEmail()) > 0){
-            throw new ExistEmailException("이미 존재하는 이메일입니다.");
-        }
-
-        User user = User.builder()
-                .email(userInput.getEmail())
-                .userName(userInput.getUserName())
-                .password(userInput.getPassword())
-                .phone(userInput.getPhone())
-                .regDate(LocalDateTime.now())
-                .build();
-
-        userRepository.save(user);
-
-        return ResponseEntity.ok().build();
-    }
+    // Q36
+//    @PostMapping("/api/user")
+//    public ResponseEntity<?> addUser(@RequestBody @Valid UserInput userInput, Errors errors){
+//        List<ResponseError> responseErrorList = new ArrayList<>();
+//        if(errors.hasErrors()){
+//            errors.getAllErrors().stream().forEach((e)->{
+//                responseErrorList.add(ResponseError.of((FieldError)e));
+//            });
+//            return new ResponseEntity<>(responseErrorList, HttpStatus.BAD_REQUEST);
+//        }
+//
+//        if(userRepository.countByEmail(userInput.getEmail()) > 0){
+//            throw new ExistEmailException("이미 존재하는 이메일입니다.");
+//        }
+//
+//        User user = User.builder()
+//                .email(userInput.getEmail())
+//                .userName(userInput.getUserName())
+//                .password(userInput.getPassword())
+//                .phone(userInput.getPhone())
+//                .regDate(LocalDateTime.now())
+//                .build();
+//
+//        userRepository.save(user);
+//
+//        return ResponseEntity.ok().build();
+//    }
 
     @ExceptionHandler(value = {ExistEmailException.class, PasswordNotMatchException.class})
     public ResponseEntity<?> ExistsEmailExceptionHandler(RuntimeException exception) {
         return new ResponseEntity<>(exception.getMessage(), HttpStatus.BAD_REQUEST);
     }
 
-
+    // Q37
     @PatchMapping("/api/user/{id}/password")
     public ResponseEntity<?> updateUserPassword(@PathVariable Long id, @RequestBody UserInputPassword userInputPassword, Errors errors) {
         List<ResponseError> responseErrorList = new ArrayList<>();
@@ -179,5 +181,38 @@ public class ApiUserController {
         return ResponseEntity.ok().build();
     }
 
+    // Q38
+    private String getEncryptPassword(String password) {
+        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+        return bCryptPasswordEncoder.encode(password);
+    }
 
+    @PostMapping("/api/user")
+    public ResponseEntity<?> addUser(@RequestBody @Valid UserInput userInput, Errors errors){
+        List<ResponseError> responseErrorList = new ArrayList<>();
+        if(errors.hasErrors()){
+            errors.getAllErrors().stream().forEach((e)->{
+                responseErrorList.add(ResponseError.of((FieldError)e));
+            });
+            return new ResponseEntity<>(responseErrorList, HttpStatus.BAD_REQUEST);
+        }
+
+        if(userRepository.countByEmail(userInput.getEmail()) > 0){
+            throw new ExistEmailException("이미 존재하는 이메일입니다.");
+        }
+
+        String encryptPassword = getEncryptPassword(userInput.getPassword());
+
+        User user = User.builder()
+                .email(userInput.getEmail())
+                .userName(userInput.getUserName())
+                .password(encryptPassword)
+                .phone(userInput.getPhone())
+                .regDate(LocalDateTime.now())
+                .build();
+
+        userRepository.save(user);
+
+        return ResponseEntity.ok().build();
+    }
 }
