@@ -5,12 +5,14 @@ import com.example.jpa.notice.model.NoticeResponse;
 import com.example.jpa.notice.model.ResponseError;
 import com.example.jpa.notice.repository.NoticeRepository;
 import com.example.jpa.user.entity.User;
+import com.example.jpa.user.exception.ExistEmailException;
 import com.example.jpa.user.exception.UserNotFoundException;
 import com.example.jpa.user.model.UserInput;
 import com.example.jpa.user.model.UserResponse;
 import com.example.jpa.user.model.UserUpdate;
 import com.example.jpa.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.apache.coyote.Response;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -46,28 +48,29 @@ public class ApiUserController {
 //        return new ResponseEntity<>(userInput, HttpStatus.OK);
 //    }
 
-    @PostMapping("/api/user")
-    public ResponseEntity<?> addUser(@RequestBody @Valid UserInput userInput, Errors errors) {
-        List<ResponseError> responseErrorList = new ArrayList<>();
-
-        if (errors.hasErrors()) {
-            errors.getAllErrors().forEach((e) -> {
-                responseErrorList.add(ResponseError.of((FieldError) e));
-            });
-            return new ResponseEntity<>(responseErrorList, HttpStatus.BAD_REQUEST);
-        }
-
-        User user = User.builder()
-                .email(userInput.getEmail())
-                .userName(userInput.getUserName())
-                .password(userInput.getPassword())
-                .phone(userInput.getPhone())
-                .regDate(java.time.LocalDateTime.now())
-                .build();
-        userRepository.save(user);
-
-        return new ResponseEntity<>(userInput, HttpStatus.OK);
-    }
+//    Q32
+//    @PostMapping("/api/user")
+//    public ResponseEntity<?> addUser(@RequestBody @Valid UserInput userInput, Errors errors) {
+//        List<ResponseError> responseErrorList = new ArrayList<>();
+//
+//        if (errors.hasErrors()) {
+//            errors.getAllErrors().forEach((e) -> {
+//                responseErrorList.add(ResponseError.of((FieldError) e));
+//            });
+//            return new ResponseEntity<>(responseErrorList, HttpStatus.BAD_REQUEST);
+//        }
+//
+//        User user = User.builder()
+//                .email(userInput.getEmail())
+//                .userName(userInput.getUserName())
+//                .password(userInput.getPassword())
+//                .phone(userInput.getPhone())
+//                .regDate(java.time.LocalDateTime.now())
+//                .build();
+//        userRepository.save(user);
+//
+//        return new ResponseEntity<>(userInput, HttpStatus.OK);
+//    }
 
     @PutMapping("/api/user/{id}")
     public ResponseEntity<?> updateUser(@PathVariable Long id, @RequestBody UserUpdate userUpdate, Errors errors) {
@@ -119,5 +122,37 @@ public class ApiUserController {
         });
 
         return noticeResponseList;
+    }
+
+    @PostMapping("/api/user")
+    public ResponseEntity<?> addUser(@RequestBody @Valid UserInput userInput, Errors errors){
+        List<ResponseError> responseErrorList = new ArrayList<>();
+        if(errors.hasErrors()){
+            errors.getAllErrors().stream().forEach((e)->{
+                responseErrorList.add(ResponseError.of((FieldError)e));
+            });
+            return new ResponseEntity<>(responseErrorList, HttpStatus.BAD_REQUEST);
+        }
+
+        if(userRepository.countByEmail(userInput.getEmail()) > 0){
+            throw new ExistEmailException("이미 존재하는 이메일입니다.");
+        }
+
+        User user = User.builder()
+                .email(userInput.getEmail())
+                .userName(userInput.getUserName())
+                .password(userInput.getPassword())
+                .phone(userInput.getPhone())
+                .regDate(LocalDateTime.now())
+                .build();
+
+        userRepository.save(user);
+
+        return ResponseEntity.ok().build();
+    }
+
+    @ExceptionHandler(ExistEmailException.class)
+    public ResponseEntity<?> ExistsEmailExceptionHandler(ExistEmailException exception) {
+        return new ResponseEntity<>(exception.getMessage(), HttpStatus.BAD_REQUEST);
     }
 }
