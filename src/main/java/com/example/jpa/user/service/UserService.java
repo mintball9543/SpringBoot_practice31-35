@@ -16,4 +16,6 @@ public interface UserService {
     List<UserNoticeCount> getUserNoticeCount();
 
     List<UserLogCount> getUserLogCount();
+
+    List<UserLogCount> getUserLikeBest();
 }
