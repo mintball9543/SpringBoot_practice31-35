@@ -7,6 +7,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.*;
@@ -31,4 +32,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
     List<User> findByEmailContainsOrPhoneContainsOrUserNameContains(String email, String phone, String userName);
 
     long countByStatus(UserStatus userStatus);
+
+    // JPQL
+    @Query("select u from User u where u.regDate between :startDate and :endDate")
+    List<User> findToday(LocalDateTime startDate, LocalDateTime endDate);
 }

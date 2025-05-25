@@ -155,5 +155,14 @@ public class ApiAdminUserController {
         return ResponseEntity.ok().body(ResponseMessage.success(userSummary));
     }
 
+    // Q57
+    @GetMapping("/api/admin/user/today")
+    public ResponseEntity<?> todayUser() {
+
+        List<User> users = userService.getTodayUsers();
+
+        return ResponseEntity.ok().body(ResponseMessage.success(users));
+    }
+
 
 }

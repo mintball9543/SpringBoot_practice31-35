@@ -9,4 +9,5 @@ public interface UserService {
 
     UserSummary getUserStatusCount();
 
+    List<User> getTodayUsers();
 }
