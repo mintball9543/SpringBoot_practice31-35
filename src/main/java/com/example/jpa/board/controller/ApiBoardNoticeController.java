@@ -1,5 +1,6 @@
 package com.example.jpa.board.controller;
 
+import com.example.jpa.board.entity.BoardType;
 import com.example.jpa.board.model.BoardTypeInput;
 import com.example.jpa.board.model.ServiceResult;
 import com.example.jpa.board.service.BoardService;
@@ -68,6 +69,17 @@ public class ApiBoardNoticeController {
         return ResponseEntity.ok().body(ResponseMessage.success());
 
     }
+
+    // Q64
+    @GetMapping("/api/board/type")
+    public ResponseEntity<?> boardType()  {
+
+        List<BoardType> boardTypeList = boardService.getAllBoardType();
+
+        return ResponseEntity.ok().body(ResponseMessage.success(boardTypeList));
+
+    }
+
 
 
 }
