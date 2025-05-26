@@ -103,5 +103,13 @@ public class ApiBoardNoticeController {
 
     }
 
+    // Q67
+    @PatchMapping("/api/board/{id}/top")
+    public ResponseEntity<?> boardPostTop(@PathVariable Long id) {
+        ServiceResult result = boardService.setBoardTop(id, true);
+        return ResponseEntity.ok().body(result);
+    }
+
+
 
 }

@@ -78,6 +78,8 @@ create table BOARD
     BOARD_TYPE_ID BIGINT,
     USER_ID       BIGINT,
 
+    TOP_YN         BOOLEAN,
+
     constraint FK_BOARD_BOARD_TYPE_ID foreign key (BOARD_TYPE_ID) references BOARD_TYPE (ID),
     constraint FK_BOARD_USER_ID foreign key (USER_ID) references USER (ID)
 );
