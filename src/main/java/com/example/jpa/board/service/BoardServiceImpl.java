@@ -3,6 +3,7 @@ package com.example.jpa.board.service;
 
 import com.example.jpa.board.entity.BoardType;
 import com.example.jpa.board.model.BoardTypeInput;
+import com.example.jpa.board.model.BoardTypeUsing;
 import com.example.jpa.board.model.ServiceResult;
 import com.example.jpa.board.repository.BoardRepository;
 import com.example.jpa.board.repository.BoardTypeRepository;
@@ -82,5 +83,21 @@ public class BoardServiceImpl implements BoardService {
         return boardTypeRepository.findAll();
     }
 
+
+    @Override
+    public ServiceResult setBoardTypeUsing(Long id, BoardTypeUsing boardTypeUsing) {
+
+        Optional<BoardType> optionalBoardType = boardTypeRepository.findById(id);
+        if (!optionalBoardType.isPresent()) {
+            return ServiceResult.fail("삭제할 게시판타입이 없습니다.");
+        }
+
+        BoardType boardType = optionalBoardType.get();
+
+        boardType.setUsingYn(boardTypeUsing.isUsingYn());
+        boardTypeRepository.save(boardType);
+
+        return ServiceResult.success();
+    }
 
 }
