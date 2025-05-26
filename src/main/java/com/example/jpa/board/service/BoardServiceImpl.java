@@ -57,4 +57,23 @@ public class BoardServiceImpl implements BoardService {
         return ServiceResult.success();
     }
 
+    @Override
+    public ServiceResult deleteBoard(Long id) {
+
+        Optional<BoardType> optionalBoardType = boardTypeRepository.findById(id);
+        if (!optionalBoardType.isPresent()) {
+            return ServiceResult.fail("삭제할 게시판타입이 없습니다.");
+        }
+
+        BoardType boardType = optionalBoardType.get();
+
+        if (boardRepository.countByBoardType(boardType) > 0){
+            return ServiceResult.fail("삭제할 게시판타입의 게시글이 존재합니다.");
+        }
+
+        boardTypeRepository.delete(boardType);
+
+        return ServiceResult.success();
+    }
+
 }
