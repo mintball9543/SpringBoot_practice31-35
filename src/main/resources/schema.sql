@@ -105,7 +105,7 @@ create table BOARD_LIKE
     BOARD_ID      BIGINT,
     USER_ID       BIGINT,
 
-        constraint FK_BOARD_LIKE_BOARD_ID foreign key (BOARD_ID) references BOARD (ID),
+    constraint FK_BOARD_LIKE_BOARD_ID foreign key (BOARD_ID) references BOARD (ID),
     constraint FK_BOARD_LIKE_USER_ID foreign key (USER_ID) references USER (ID)
 );
 
@@ -122,4 +122,19 @@ create table BOARD_BAD_REPORT
     USER_EMAIL      VARCHAR(255),
     USER_ID         BIGINT,
     USER_NAME       VARCHAR(255)
+);
+
+create table BOARD_SCRAP
+(
+    ID              BIGINT auto_increment primary key,
+    BOARD_CONTENTS  VARCHAR(255),
+    BOARD_ID        BIGINT,
+    BOARD_REG_DATE  TIMESTAMP,
+    BOARD_TITLE     VARCHAR(255),
+    BOARD_TYPE_ID   BIGINT,
+    BOARD_USER_ID   BIGINT,
+    REG_DATE        TIMESTAMP,
+    USER_ID         BIGINT,
+
+    constraint FK_BOARD_SCRAP_BOARD_ID foreign key (BOARD_ID) references BOARD (ID)
 );

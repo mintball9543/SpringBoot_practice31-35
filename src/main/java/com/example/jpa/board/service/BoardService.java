@@ -34,4 +34,6 @@ public interface BoardService {
     ServiceResult addBadReport(Long id, String email, BoardBadReportInput boardBadReportInput);
 
     List<BoardBadReport> badReportList();
+
+    ServiceResult scrap(Long id, String email);
 }

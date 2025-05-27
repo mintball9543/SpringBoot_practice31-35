@@ -24,6 +24,7 @@ public class BoardServiceImpl implements BoardService {
     private final BoardHitsRepository boardHitsRepository;
     private final BoardLikeRepository boardLikeRepository;
     private final BoardBadReportRepository boardBadReportRepository;
+    private final BoardScrapRepository boardScrapRepository;
 
     @Override
     public ServiceResult addBoard(BoardTypeInput boardTypeInput) {
@@ -265,5 +266,35 @@ public class BoardServiceImpl implements BoardService {
     public List<BoardBadReport> badReportList() {
         return boardBadReportRepository.findAll();
     }
+
+    @Override
+    public ServiceResult scrap(Long id, String email) {
+
+        Optional<Board> optionalBoard = boardRepository.findById(id);
+        if (!optionalBoard.isPresent()) {
+            return ServiceResult.fail("게시글이 존재하지 않습니다.");
+        }
+        Board board = optionalBoard.get();
+
+        Optional<User> optionalUser = userRepository.findByEmail(email);
+        if (!optionalUser.isPresent()) {
+            return ServiceResult.fail("회원 정보가 존재하지 않습니다.");
+        }
+        User user = optionalUser.get();
+
+        BoardScrap boardScrap = BoardScrap.builder()
+                .user(user)
+                .boardId(board.getId())
+                .boardTypeId(board.getBoardType().getId())
+                .boardTitle(board.getTitle())
+                .boardContents(board.getContents())
+                .boardRegDate(board.getRegDate())
+                .regDate(LocalDateTime.now())
+                .build();
+        boardScrapRepository.save(boardScrap);
+
+        return ServiceResult.success();
+    }
+
 
 }
