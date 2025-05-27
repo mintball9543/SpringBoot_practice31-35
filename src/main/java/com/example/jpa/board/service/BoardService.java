@@ -1,5 +1,6 @@
 package com.example.jpa.board.service;
 
+import com.example.jpa.board.entity.BoardBadReport;
 import com.example.jpa.board.entity.BoardType;
 import com.example.jpa.board.model.*;
 import org.springframework.stereotype.Service;
@@ -32,4 +33,5 @@ public interface BoardService {
 
     ServiceResult addBadReport(Long id, String email, BoardBadReportInput boardBadReportInput);
 
+    List<BoardBadReport> badReportList();
 }

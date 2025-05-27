@@ -1,9 +1,12 @@
 package com.example.jpa.common.model;
 
+import com.example.jpa.board.entity.BoardBadReport;
 import com.example.jpa.board.model.ServiceResult;
 import com.example.jpa.user.model.ResponseMessage;
 import org.apache.coyote.Response;
 import org.springframework.http.ResponseEntity;
+
+import java.util.List;
 
 public class ResponseResult {
 
@@ -15,6 +18,11 @@ public class ResponseResult {
     public static ResponseEntity<?> success() {
         return ResponseEntity.ok().body(ResponseMessage.success());
     }
+
+    public static ResponseEntity<?> success(List<BoardBadReport> data) {
+        return ResponseEntity.ok().body(ResponseMessage.success(data));
+    }
+
 
     public static ResponseEntity<?> result(ServiceResult result) {
         if (result.isFail()) {

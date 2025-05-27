@@ -261,4 +261,9 @@ public class BoardServiceImpl implements BoardService {
         return ServiceResult.success();
     }
 
+    @Override
+    public List<BoardBadReport> badReportList() {
+        return boardBadReportRepository.findAll();
+    }
+
 }
