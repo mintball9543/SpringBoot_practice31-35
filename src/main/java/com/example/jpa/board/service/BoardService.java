@@ -38,4 +38,9 @@ public interface BoardService {
     ServiceResult scrap(Long id, String email);
 
     ServiceResult removeScrap(Long id, String email);
+
+    ServiceResult addBookmark(Long id, String email);
+
+    ServiceResult removeBookmark(Long id, String email);
+
 }
