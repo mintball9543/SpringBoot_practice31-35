@@ -2,11 +2,15 @@
 package com.example.jpa.board.service;
 
 import com.example.jpa.board.entity.Board;
+import com.example.jpa.board.entity.BoardHits;
 import com.example.jpa.board.entity.BoardType;
 import com.example.jpa.board.model.*;
+import com.example.jpa.board.repository.BoardHitsRepository;
 import com.example.jpa.board.repository.BoardRepository;
 import com.example.jpa.board.repository.BoardTypeCustomRepository;
 import com.example.jpa.board.repository.BoardTypeRepository;
+import com.example.jpa.user.entity.User;
+import com.example.jpa.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +25,8 @@ public class BoardServiceImpl implements BoardService {
     private final BoardTypeRepository boardTypeRepository;
     private final BoardRepository boardRepository;
     private final BoardTypeCustomRepository boardTypeCustomRepository;
+    private final UserRepository userRepository;
+    private final BoardHitsRepository boardHitsRepository;
 
     @Override
     public ServiceResult addBoard(BoardTypeInput boardTypeInput) {
@@ -146,6 +152,33 @@ public class BoardServiceImpl implements BoardService {
         return ServiceResult.success();
     }
 
+    @Override
+    public ServiceResult setBoardHits(Long id, String email) {
+
+        Optional<Board> optionalBoard = boardRepository.findById(id);
+        if (!optionalBoard.isPresent()) {
+            return ServiceResult.fail("게시글이 존재하지 않습니다.");
+        }
+        Board board = optionalBoard.get();
+
+        Optional<User> optionalUser = userRepository.findByEmail(email);
+        if (!optionalUser.isPresent()) {
+            return ServiceResult.fail("회원 정보가 존재하지 않습니다.");
+        }
+        User user = optionalUser.get();
+
+
+        if (boardHitsRepository.countByBoardAndUser(board, user) > 0) {
+            return ServiceResult.fail("이미 조회수가 있습니다.");
+        }
+
+        boardHitsRepository.save(BoardHits.builder()
+                .board(board)
+                .user(user)
+                .regDate(LocalDateTime.now())
+                .build());
+        return ServiceResult.success();
+    }
 
 
 }
