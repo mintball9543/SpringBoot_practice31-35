@@ -80,6 +80,9 @@ create table BOARD
 
     TOP_YN         BOOLEAN,
 
+    PUBLISH_START_DATE DATE,
+    PUBLISH_END_DATE   DATE,
+
     constraint FK_BOARD_BOARD_TYPE_ID foreign key (BOARD_TYPE_ID) references BOARD_TYPE (ID),
     constraint FK_BOARD_USER_ID foreign key (USER_ID) references USER (ID)
 );

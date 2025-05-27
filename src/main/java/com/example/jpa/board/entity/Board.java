@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @NoArgsConstructor
@@ -39,4 +40,10 @@ public class Board {
 
     @Column
     private boolean topYn;
+
+    @Column
+    LocalDate publishStartDate;
+
+    @Column
+    LocalDate publishEndDate;
 }

@@ -1,10 +1,7 @@
 package com.example.jpa.board.service;
 
 import com.example.jpa.board.entity.BoardType;
-import com.example.jpa.board.model.BoardTypeCount;
-import com.example.jpa.board.model.BoardTypeInput;
-import com.example.jpa.board.model.BoardTypeUsing;
-import com.example.jpa.board.model.ServiceResult;
+import com.example.jpa.board.model.*;
 import org.springframework.stereotype.Service;
 
 import javax.validation.Valid;
@@ -24,4 +21,6 @@ public interface BoardService {
     List<BoardTypeCount> getBoardTypeCount();
 
     ServiceResult setBoardTop(Long id, boolean topYn);
+
+    ServiceResult setBoardPeriod(Long id, BoardPeriod boardPeriod);
 }
