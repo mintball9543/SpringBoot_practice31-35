@@ -3,12 +3,10 @@ package com.example.jpa.board.service;
 
 import com.example.jpa.board.entity.Board;
 import com.example.jpa.board.entity.BoardHits;
+import com.example.jpa.board.entity.BoardLike;
 import com.example.jpa.board.entity.BoardType;
 import com.example.jpa.board.model.*;
-import com.example.jpa.board.repository.BoardHitsRepository;
-import com.example.jpa.board.repository.BoardRepository;
-import com.example.jpa.board.repository.BoardTypeCustomRepository;
-import com.example.jpa.board.repository.BoardTypeRepository;
+import com.example.jpa.board.repository.*;
 import com.example.jpa.user.entity.User;
 import com.example.jpa.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -27,6 +25,7 @@ public class BoardServiceImpl implements BoardService {
     private final BoardTypeCustomRepository boardTypeCustomRepository;
     private final UserRepository userRepository;
     private final BoardHitsRepository boardHitsRepository;
+    private final BoardLikeRepository boardLikeRepository;
 
     @Override
     public ServiceResult addBoard(BoardTypeInput boardTypeInput) {
@@ -179,6 +178,35 @@ public class BoardServiceImpl implements BoardService {
                 .build());
         return ServiceResult.success();
     }
+
+    @Override
+    public ServiceResult setBoardLike(Long id, String email) {
+
+        Optional<Board> optionalBoard = boardRepository.findById(id);
+        if (!optionalBoard.isPresent()) {
+            return ServiceResult.fail("게시글이 존재하지 않습니다.");
+        }
+        Board board = optionalBoard.get();
+
+        Optional<User> optionalUser = userRepository.findByEmail(email);
+        if (!optionalUser.isPresent()) {
+            return ServiceResult.fail("회원 정보가 존재하지 않습니다.");
+        }
+        User user = optionalUser.get();
+
+        long boardLikeCount = boardLikeRepository.countByBoardAndUser(board, user);
+        if (boardLikeCount > 0) {
+            return ServiceResult.fail("이미 좋아요한 내용이 있습니다.");
+        }
+
+        boardLikeRepository.save(BoardLike.builder()
+                .board(board)
+                .user(user)
+                .regDate(LocalDateTime.now()).build());
+
+        return ServiceResult.success();
+    }
+
 
 
 }

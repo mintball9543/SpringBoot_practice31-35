@@ -129,6 +129,7 @@ public class ApiBoardNoticeController {
         return ResponseResult.success();
     }
 
+    // Q70
     @PutMapping("/api/board/{id}/hits")
     public ResponseEntity<?> boardHits(@PathVariable Long id, @RequestHeader("F-TOKEN") String token) {
 
@@ -147,7 +148,21 @@ public class ApiBoardNoticeController {
         return ResponseResult.success();
     }
 
+    // Q71
+    @PutMapping("/api/board/{id}/like")
+    public ResponseEntity<?> boardLike(@PathVariable Long id
+            , @RequestHeader("F-TOKEN") String token) {
 
+        String email = "";
+        try {
+            email = JWTUtils.getIssuer(token);
+        } catch (JWTVerificationException e) {
+            return ResponseResult.fail("토큰 정보가 정확하지 않습니다.");
+        }
+
+        ServiceResult result = boardService.setBoardLike(id, email);
+        return ResponseResult.result(result);
+    }
 
 
 }

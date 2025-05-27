@@ -25,4 +25,6 @@ public interface BoardService {
     ServiceResult setBoardPeriod(Long id, BoardPeriod boardPeriod);
 
     ServiceResult setBoardHits(Long id, String email);
+
+    ServiceResult setBoardLike(Long id, String email);
 }
