@@ -4,6 +4,9 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTDecodeException;
 import com.auth0.jwt.exceptions.SignatureVerificationException;
+import com.example.jpa.board.entity.Board;
+import com.example.jpa.board.service.BoardService;
+import com.example.jpa.common.model.ResponseResult;
 import com.example.jpa.notice.entity.Notice;
 import com.example.jpa.notice.entity.NoticeLike;
 import com.example.jpa.notice.model.NoticeResponse;
@@ -46,6 +49,7 @@ public class ApiUserController {
     private final UserRepository userRepository;
     private  final NoticeRepository noticeRepository;
     private final NoticeLikeRepository noticeLikeRepository;
+    private final BoardService boardService;
 
     // Q31
 //    @PostMapping("/api/user")
@@ -393,5 +397,19 @@ public class ApiUserController {
         // 토큰 삭제 로직은 애매하므로 기간을 설정하거나 횟수 제한을 둔다.
 
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/api/user/board/post")
+    public ResponseEntity<?> myPost(@RequestHeader("F-TOKEN") String token) {
+
+        String email = "";
+        try {
+            email = JWTUtils.getIssuer(token);
+        } catch (SignatureVerificationException e) {
+            return ResponseResult.fail("토근 정보가 정확하지 않습니다.");
+        }
+
+        List<Board> list = boardService.postList(email);
+        return ResponseResult.success(list);
     }
 }
