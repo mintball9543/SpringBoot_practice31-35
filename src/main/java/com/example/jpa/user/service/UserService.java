@@ -3,9 +3,11 @@ package com.example.jpa.user.service;
 import com.example.jpa.board.model.ServiceResult;
 import com.example.jpa.user.entity.User;
 import com.example.jpa.user.model.UserLogCount;
+import com.example.jpa.user.model.UserLogin;
 import com.example.jpa.user.model.UserNoticeCount;
 import com.example.jpa.user.model.UserSummary;
 
+import javax.validation.Valid;
 import java.util.List;
 
 public interface UserService {
@@ -23,4 +25,6 @@ public interface UserService {
     ServiceResult addInterestUser(String email, Long id);
 
     ServiceResult removeInterestUser(String email, Long id);
+
+    User login(UserLogin userLogin);
 }
