@@ -2,6 +2,7 @@ package com.example.jpa.board.service;
 
 import com.example.jpa.board.entity.Board;
 import com.example.jpa.board.entity.BoardBadReport;
+import com.example.jpa.board.entity.BoardComment;
 import com.example.jpa.board.entity.BoardType;
 import com.example.jpa.board.model.*;
 import org.springframework.stereotype.Service;
@@ -45,4 +46,6 @@ public interface BoardService {
     ServiceResult removeBookmark(Long id, String email);
 
     List<Board> postList(String email);
+
+    List<BoardComment> commentList(String email);
 }
