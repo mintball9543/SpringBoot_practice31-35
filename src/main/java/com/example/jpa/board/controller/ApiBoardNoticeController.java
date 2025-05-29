@@ -220,4 +220,16 @@ public class ApiBoardNoticeController {
         return ResponseResult.success(list);
     }
 
+    // Q93
+    @PostMapping("/api/board")
+    public ResponseEntity<?> add(
+            @RequestHeader("F-TOKEN") String token
+            , @RequestBody BoardInput boardInput) {
+
+        String email = JWTUtils.getIssuer(token);
+
+        ServiceResult result = boardService.add(email, boardInput);
+        return ResponseResult.result(result);
+    }
+
 }

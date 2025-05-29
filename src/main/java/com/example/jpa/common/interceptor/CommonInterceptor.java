@@ -22,6 +22,22 @@ public class CommonInterceptor implements HandlerInterceptor {
         log.info(request.getMethod());
         log.info(request.getRequestURI());
 
+        if (!validJWT(request)) {
+            throw new AuthFailException("인증정보가 정확하지 않습니다.");
+        }
+
+        return true;
+    }
+
+    private boolean validJWT(HttpServletRequest request) {
+
+        String token = request.getHeader("F-TOKEN");
+        String email = "";
+        try {
+            email = JWTUtils.getIssuer(token);
+        } catch (JWTVerificationException e) {
+            return false;
+        }
 
         return true;
     }
