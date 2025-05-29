@@ -45,8 +45,6 @@ public class BoardLogger {
             log.info(sb.toString());
         }
 
-
-
         log.info("################################");
         log.info("################################");
         log.info(" 컨트롤러detail 호출 후 !!!!!!!!!!!!!");

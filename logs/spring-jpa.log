@@ -386,3 +386,155 @@ Using generated security password: 74542549-babf-4046-8dea-4660a35ec2cb
 2025-05-29 13:16:17.208  INFO 8196 --- [http-nio-8080-exec-1] com.example.jpa.common.aop.BoardLogger   : ################################
 2025-05-29 13:16:17.208  INFO 8196 --- [http-nio-8080-exec-1] com.example.jpa.common.aop.BoardLogger   : ################################
 2025-05-29 13:16:17.208  INFO 8196 --- [http-nio-8080-exec-1] com.example.jpa.common.aop.BoardLogger   :  컨트롤러detail 호출 후 !!!!!!!!!!!!!
+2025-05-29 13:17:13.355  WARN 8196 --- [http-nio-8080-exec-4] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.bind.MissingPathVariableException: Missing URI template variable 'id' for method parameter of type Long]
+2025-05-29 13:17:30.526  INFO 8196 --- [http-nio-8080-exec-4] com.example.jpa.common.aop.BoardLogger   : ################################
+2025-05-29 13:17:30.527  INFO 8196 --- [http-nio-8080-exec-4] com.example.jpa.common.aop.BoardLogger   : ################################
+2025-05-29 13:17:30.528  INFO 8196 --- [http-nio-8080-exec-4] com.example.jpa.common.aop.BoardLogger   :  컨트롤러detail 호출 전 !!!!!!!!!!!!!
+2025-05-29 13:17:30.528  INFO 8196 --- [http-nio-8080-exec-4] com.example.jpa.common.aop.LoginLogger   : ############################
+2025-05-29 13:17:30.528  INFO 8196 --- [http-nio-8080-exec-4] com.example.jpa.common.aop.LoginLogger   : ############################
+2025-05-29 13:17:30.528  INFO 8196 --- [http-nio-8080-exec-4] com.example.jpa.common.aop.LoginLogger   :  서비스호출 전 !!!
+2025-05-29 13:17:30.530 DEBUG 8196 --- [http-nio-8080-exec-4] org.hibernate.SQL                        : select board0_.id as id1_0_0_, board0_.board_type_id as board_ty8_0_0_, board0_.contents as contents2_0_0_, board0_.publish_end_date as publish_3_0_0_, board0_.publish_start_date as publish_4_0_0_, board0_.reg_date as reg_date5_0_0_, board0_.title as title6_0_0_, board0_.top_yn as top_yn7_0_0_, board0_.user_id as user_id9_0_0_, boardtype1_.id as id1_7_1_, boardtype1_.board_name as board_na2_7_1_, boardtype1_.reg_date as reg_date3_7_1_, boardtype1_.update_date as update_d4_7_1_, boardtype1_.using_yn as using_yn5_7_1_, user2_.id as id1_11_2_, user2_.email as email2_11_2_, user2_.lock_yn as lock_yn3_11_2_, user2_.password as password4_11_2_, user2_.phone as phone5_11_2_, user2_.reg_date as reg_date6_11_2_, user2_.status as status7_11_2_, user2_.update_date as update_d8_11_2_, user2_.user_name as user_nam9_11_2_ from board board0_ left outer join board_type boardtype1_ on board0_.board_type_id=boardtype1_.id left outer join user user2_ on board0_.user_id=user2_.id where board0_.id=?
+2025-05-29 13:17:30.530 TRACE 8196 --- [http-nio-8080-exec-4] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [BIGINT] - [1]
+2025-05-29 13:17:30.531 TRACE 8196 --- [http-nio-8080-exec-4] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([id1_7_1_] : [BIGINT]) - [1]
+2025-05-29 13:17:30.531 TRACE 8196 --- [http-nio-8080-exec-4] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([id1_11_2_] : [BIGINT]) - [1]
+2025-05-29 13:17:30.532 TRACE 8196 --- [http-nio-8080-exec-4] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([board_ty8_0_0_] : [BIGINT]) - [1]
+2025-05-29 13:17:30.533 TRACE 8196 --- [http-nio-8080-exec-4] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([contents2_0_0_] : [VARCHAR]) - [게시글내용1]
+2025-05-29 13:17:30.533 TRACE 8196 --- [http-nio-8080-exec-4] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([publish_3_0_0_] : [DATE]) - [null]
+2025-05-29 13:17:30.533 TRACE 8196 --- [http-nio-8080-exec-4] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([publish_4_0_0_] : [DATE]) - [null]
+2025-05-29 13:17:30.533 TRACE 8196 --- [http-nio-8080-exec-4] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([reg_date5_0_0_] : [TIMESTAMP]) - [2021-02-01T01:12:37]
+2025-05-29 13:17:30.535 TRACE 8196 --- [http-nio-8080-exec-4] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([title6_0_0_] : [VARCHAR]) - [게시글1]
+2025-05-29 13:17:30.535 TRACE 8196 --- [http-nio-8080-exec-4] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([top_yn7_0_0_] : [BOOLEAN]) - [false]
+2025-05-29 13:17:30.535 TRACE 8196 --- [http-nio-8080-exec-4] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([user_id9_0_0_] : [BIGINT]) - [1]
+2025-05-29 13:17:30.535 TRACE 8196 --- [http-nio-8080-exec-4] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([board_na2_7_1_] : [VARCHAR]) - [게시판1]
+2025-05-29 13:17:30.536 TRACE 8196 --- [http-nio-8080-exec-4] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([reg_date3_7_1_] : [TIMESTAMP]) - [2021-02-01T01:12:37]
+2025-05-29 13:17:30.536 TRACE 8196 --- [http-nio-8080-exec-4] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([update_d4_7_1_] : [TIMESTAMP]) - [null]
+2025-05-29 13:17:30.536 TRACE 8196 --- [http-nio-8080-exec-4] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([using_yn5_7_1_] : [BOOLEAN]) - [true]
+2025-05-29 13:17:30.536 TRACE 8196 --- [http-nio-8080-exec-4] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([email2_11_2_] : [VARCHAR]) - [test@naver.com]
+2025-05-29 13:17:30.536 TRACE 8196 --- [http-nio-8080-exec-4] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([lock_yn3_11_2_] : [BOOLEAN]) - [false]
+2025-05-29 13:17:30.536 TRACE 8196 --- [http-nio-8080-exec-4] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([password4_11_2_] : [VARCHAR]) - [$2a$10$aVjtWrojTOJJStC5EFH6Z.nG/U4c0PXJke3pmYWElmS/M77dG3Ud2]
+2025-05-29 13:17:30.536 TRACE 8196 --- [http-nio-8080-exec-4] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([phone5_11_2_] : [VARCHAR]) - [010-1111-2222]
+2025-05-29 13:17:30.537 TRACE 8196 --- [http-nio-8080-exec-4] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([reg_date6_11_2_] : [TIMESTAMP]) - [2021-02-01T00:49:43]
+2025-05-29 13:17:30.537 TRACE 8196 --- [http-nio-8080-exec-4] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([status7_11_2_] : [INTEGER]) - [Using]
+2025-05-29 13:17:30.538 TRACE 8196 --- [http-nio-8080-exec-4] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([update_d8_11_2_] : [TIMESTAMP]) - [null]
+2025-05-29 13:17:30.538 TRACE 8196 --- [http-nio-8080-exec-4] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([user_nam9_11_2_] : [VARCHAR]) - [박규태]
+2025-05-29 13:17:30.539  INFO 8196 --- [http-nio-8080-exec-4] com.example.jpa.common.aop.LoginLogger   : ############################
+2025-05-29 13:17:30.539  INFO 8196 --- [http-nio-8080-exec-4] com.example.jpa.common.aop.LoginLogger   : ############################
+2025-05-29 13:17:30.539  INFO 8196 --- [http-nio-8080-exec-4] com.example.jpa.common.aop.LoginLogger   :  서비스호출 후 !!!
+2025-05-29 13:17:30.539  INFO 8196 --- [http-nio-8080-exec-4] com.example.jpa.common.aop.BoardLogger   : ################################
+2025-05-29 13:17:30.539  INFO 8196 --- [http-nio-8080-exec-4] com.example.jpa.common.aop.BoardLogger   : ################################
+2025-05-29 13:17:30.539  INFO 8196 --- [http-nio-8080-exec-4] com.example.jpa.common.aop.BoardLogger   :  컨트롤러detail 호출 후 !!!!!!!!!!!!!
+2025-05-29 13:17:36.091 ERROR 8196 --- [http-nio-8080-exec-7] o.a.c.c.C.[.[.[/].[webServlet]           : Servlet.service() for servlet [webServlet] in context with path [] threw exception
+
+java.lang.NullPointerException: null
+	at org.h2.server.web.WebApp.query(WebApp.java:1046) ~[h2-1.4.200.jar:1.4.200]
+	at org.h2.server.web.WebApp.process(WebApp.java:241) ~[h2-1.4.200.jar:1.4.200]
+	at org.h2.server.web.WebApp.processRequest(WebApp.java:173) ~[h2-1.4.200.jar:1.4.200]
+	at org.h2.server.web.WebServlet.doGet(WebServlet.java:129) ~[h2-1.4.200.jar:1.4.200]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:626) ~[tomcat-embed-core-9.0.41.jar:4.0.FR]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:733) ~[tomcat-embed-core-9.0.41.jar:4.0.FR]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231) ~[tomcat-embed-core-9.0.41.jar:9.0.41]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-9.0.41.jar:9.0.41]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53) ~[tomcat-embed-websocket-9.0.41.jar:9.0.41]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-9.0.41.jar:9.0.41]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-9.0.41.jar:9.0.41]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:327) ~[spring-security-web-5.4.2.jar:5.4.2]
+	at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.invoke(FilterSecurityInterceptor.java:115) ~[spring-security-web-5.4.2.jar:5.4.2]
+	at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.doFilter(FilterSecurityInterceptor.java:81) ~[spring-security-web-5.4.2.jar:5.4.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336) ~[spring-security-web-5.4.2.jar:5.4.2]
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:119) ~[spring-security-web-5.4.2.jar:5.4.2]
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:113) ~[spring-security-web-5.4.2.jar:5.4.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336) ~[spring-security-web-5.4.2.jar:5.4.2]
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:126) ~[spring-security-web-5.4.2.jar:5.4.2]
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:81) ~[spring-security-web-5.4.2.jar:5.4.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336) ~[spring-security-web-5.4.2.jar:5.4.2]
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:105) ~[spring-security-web-5.4.2.jar:5.4.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336) ~[spring-security-web-5.4.2.jar:5.4.2]
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:149) ~[spring-security-web-5.4.2.jar:5.4.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336) ~[spring-security-web-5.4.2.jar:5.4.2]
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63) ~[spring-security-web-5.4.2.jar:5.4.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336) ~[spring-security-web-5.4.2.jar:5.4.2]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:103) ~[spring-security-web-5.4.2.jar:5.4.2]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:89) ~[spring-security-web-5.4.2.jar:5.4.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336) ~[spring-security-web-5.4.2.jar:5.4.2]
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90) ~[spring-security-web-5.4.2.jar:5.4.2]
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75) ~[spring-security-web-5.4.2.jar:5.4.2]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119) ~[spring-web-5.3.3.jar:5.3.3]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336) ~[spring-security-web-5.4.2.jar:5.4.2]
+	at org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:110) ~[spring-security-web-5.4.2.jar:5.4.2]
+	at org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:80) ~[spring-security-web-5.4.2.jar:5.4.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336) ~[spring-security-web-5.4.2.jar:5.4.2]
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:55) ~[spring-security-web-5.4.2.jar:5.4.2]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119) ~[spring-web-5.3.3.jar:5.3.3]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336) ~[spring-security-web-5.4.2.jar:5.4.2]
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:211) ~[spring-security-web-5.4.2.jar:5.4.2]
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:183) ~[spring-security-web-5.4.2.jar:5.4.2]
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:358) ~[spring-web-5.3.3.jar:5.3.3]
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:271) ~[spring-web-5.3.3.jar:5.3.3]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-9.0.41.jar:9.0.41]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-9.0.41.jar:9.0.41]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-5.3.3.jar:5.3.3]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119) ~[spring-web-5.3.3.jar:5.3.3]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-9.0.41.jar:9.0.41]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-9.0.41.jar:9.0.41]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-5.3.3.jar:5.3.3]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119) ~[spring-web-5.3.3.jar:5.3.3]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-9.0.41.jar:9.0.41]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-9.0.41.jar:9.0.41]
+	at org.springframework.web.filter.HiddenHttpMethodFilter.doFilterInternal(HiddenHttpMethodFilter.java:94) ~[spring-web-5.3.3.jar:5.3.3]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119) ~[spring-web-5.3.3.jar:5.3.3]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-9.0.41.jar:9.0.41]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-9.0.41.jar:9.0.41]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-5.3.3.jar:5.3.3]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119) ~[spring-web-5.3.3.jar:5.3.3]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-9.0.41.jar:9.0.41]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-9.0.41.jar:9.0.41]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:202) ~[tomcat-embed-core-9.0.41.jar:9.0.41]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97) ~[tomcat-embed-core-9.0.41.jar:9.0.41]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:542) ~[tomcat-embed-core-9.0.41.jar:9.0.41]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:143) ~[tomcat-embed-core-9.0.41.jar:9.0.41]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92) ~[tomcat-embed-core-9.0.41.jar:9.0.41]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78) ~[tomcat-embed-core-9.0.41.jar:9.0.41]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343) ~[tomcat-embed-core-9.0.41.jar:9.0.41]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:374) ~[tomcat-embed-core-9.0.41.jar:9.0.41]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65) ~[tomcat-embed-core-9.0.41.jar:9.0.41]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:888) ~[tomcat-embed-core-9.0.41.jar:9.0.41]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1597) ~[tomcat-embed-core-9.0.41.jar:9.0.41]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49) ~[tomcat-embed-core-9.0.41.jar:9.0.41]
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628) ~[na:na]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) ~[tomcat-embed-core-9.0.41.jar:9.0.41]
+	at java.base/java.lang.Thread.run(Thread.java:829) ~[na:na]
+
+2025-05-29 13:19:51.574  INFO 8196 --- [http-nio-8080-exec-1] com.example.jpa.common.aop.BoardLogger   : ################################
+2025-05-29 13:19:51.574  INFO 8196 --- [http-nio-8080-exec-1] com.example.jpa.common.aop.BoardLogger   : ################################
+2025-05-29 13:19:51.574  INFO 8196 --- [http-nio-8080-exec-1] com.example.jpa.common.aop.BoardLogger   :  컨트롤러detail 호출 전 !!!!!!!!!!!!!
+2025-05-29 13:19:51.574  INFO 8196 --- [http-nio-8080-exec-1] com.example.jpa.common.aop.LoginLogger   : ############################
+2025-05-29 13:19:51.574  INFO 8196 --- [http-nio-8080-exec-1] com.example.jpa.common.aop.LoginLogger   : ############################
+2025-05-29 13:19:51.575  INFO 8196 --- [http-nio-8080-exec-1] com.example.jpa.common.aop.LoginLogger   :  서비스호출 전 !!!
+2025-05-29 13:19:51.575 DEBUG 8196 --- [http-nio-8080-exec-1] org.hibernate.SQL                        : select board0_.id as id1_0_0_, board0_.board_type_id as board_ty8_0_0_, board0_.contents as contents2_0_0_, board0_.publish_end_date as publish_3_0_0_, board0_.publish_start_date as publish_4_0_0_, board0_.reg_date as reg_date5_0_0_, board0_.title as title6_0_0_, board0_.top_yn as top_yn7_0_0_, board0_.user_id as user_id9_0_0_, boardtype1_.id as id1_7_1_, boardtype1_.board_name as board_na2_7_1_, boardtype1_.reg_date as reg_date3_7_1_, boardtype1_.update_date as update_d4_7_1_, boardtype1_.using_yn as using_yn5_7_1_, user2_.id as id1_11_2_, user2_.email as email2_11_2_, user2_.lock_yn as lock_yn3_11_2_, user2_.password as password4_11_2_, user2_.phone as phone5_11_2_, user2_.reg_date as reg_date6_11_2_, user2_.status as status7_11_2_, user2_.update_date as update_d8_11_2_, user2_.user_name as user_nam9_11_2_ from board board0_ left outer join board_type boardtype1_ on board0_.board_type_id=boardtype1_.id left outer join user user2_ on board0_.user_id=user2_.id where board0_.id=?
+2025-05-29 13:19:51.576 TRACE 8196 --- [http-nio-8080-exec-1] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [BIGINT] - [4]
+2025-05-29 13:19:51.578  INFO 8196 --- [http-nio-8080-exec-1] com.example.jpa.common.aop.BoardLogger   : ################################
+2025-05-29 13:19:51.578  INFO 8196 --- [http-nio-8080-exec-1] com.example.jpa.common.aop.BoardLogger   : ################################
+2025-05-29 13:19:51.578  INFO 8196 --- [http-nio-8080-exec-1] com.example.jpa.common.aop.BoardLogger   :  컨트롤러detail 호출 후 !!!!!!!!!!!!!
+2025-05-29 13:24:59.579  INFO 8196 --- [http-nio-8080-exec-5] c.e.j.u.controller.ApiLoginController    : 로그인 함수 !!!!
+2025-05-29 13:24:59.580  INFO 8196 --- [http-nio-8080-exec-5] com.example.jpa.common.aop.LoginLogger   : ############################
+2025-05-29 13:24:59.581  INFO 8196 --- [http-nio-8080-exec-5] com.example.jpa.common.aop.LoginLogger   : ############################
+2025-05-29 13:24:59.581  INFO 8196 --- [http-nio-8080-exec-5] com.example.jpa.common.aop.LoginLogger   :  서비스호출 전 !!!
+2025-05-29 13:24:59.610 DEBUG 8196 --- [http-nio-8080-exec-5] org.hibernate.SQL                        : select user0_.id as id1_11_, user0_.email as email2_11_, user0_.lock_yn as lock_yn3_11_, user0_.password as password4_11_, user0_.phone as phone5_11_, user0_.reg_date as reg_date6_11_, user0_.status as status7_11_, user0_.update_date as update_d8_11_, user0_.user_name as user_nam9_11_ from user user0_ where user0_.email=?
+2025-05-29 13:24:59.611 TRACE 8196 --- [http-nio-8080-exec-5] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [test@naver.com]
+2025-05-29 13:24:59.612 TRACE 8196 --- [http-nio-8080-exec-5] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([id1_11_] : [BIGINT]) - [1]
+2025-05-29 13:24:59.612 TRACE 8196 --- [http-nio-8080-exec-5] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([email2_11_] : [VARCHAR]) - [test@naver.com]
+2025-05-29 13:24:59.613 TRACE 8196 --- [http-nio-8080-exec-5] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([lock_yn3_11_] : [BOOLEAN]) - [false]
+2025-05-29 13:24:59.613 TRACE 8196 --- [http-nio-8080-exec-5] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([password4_11_] : [VARCHAR]) - [$2a$10$aVjtWrojTOJJStC5EFH6Z.nG/U4c0PXJke3pmYWElmS/M77dG3Ud2]
+2025-05-29 13:24:59.613 TRACE 8196 --- [http-nio-8080-exec-5] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([phone5_11_] : [VARCHAR]) - [010-1111-2222]
+2025-05-29 13:24:59.613 TRACE 8196 --- [http-nio-8080-exec-5] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([reg_date6_11_] : [TIMESTAMP]) - [2021-02-01T00:49:43]
+2025-05-29 13:24:59.613 TRACE 8196 --- [http-nio-8080-exec-5] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([status7_11_] : [INTEGER]) - [Using]
+2025-05-29 13:24:59.613 TRACE 8196 --- [http-nio-8080-exec-5] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([update_d8_11_] : [TIMESTAMP]) - [null]
+2025-05-29 13:24:59.613 TRACE 8196 --- [http-nio-8080-exec-5] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([user_nam9_11_] : [VARCHAR]) - [박규태]
+2025-05-29 13:24:59.743  INFO 8196 --- [http-nio-8080-exec-5] c.e.j.u.controller.ApiLoginController    : 로그인 에러:일치하는 정보가 없습니다.
+2025-05-29 13:28:59.443  INFO 8196 --- [SpringContextShutdownHook] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2025-05-29 13:28:59.447  INFO 8196 --- [SpringContextShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-05-29 13:28:59.448 TRACE 8196 --- [SpringContextShutdownHook] o.h.type.spi.TypeConfiguration$Scope     : Handling #sessionFactoryClosed from [org.hibernate.internal.SessionFactoryImpl@1c18ee69] for TypeConfiguration
+2025-05-29 13:28:59.448 DEBUG 8196 --- [SpringContextShutdownHook] o.h.type.spi.TypeConfiguration$Scope     : Un-scoping TypeConfiguration [org.hibernate.type.spi.TypeConfiguration$Scope@5ac711e2] from SessionFactory [org.hibernate.internal.SessionFactoryImpl@1c18ee69]
+2025-05-29 13:28:59.453  INFO 8196 --- [SpringContextShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-05-29 13:28:59.460  INFO 8196 --- [SpringContextShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
