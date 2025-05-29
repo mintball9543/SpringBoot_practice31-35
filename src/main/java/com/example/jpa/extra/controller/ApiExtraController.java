@@ -1,6 +1,7 @@
 package com.example.jpa.extra.controller;
 
 import com.example.jpa.common.model.ResponseResult;
+import com.example.jpa.extra.model.AirInput;
 import com.example.jpa.extra.model.OpenApiResult;
 import com.example.jpa.extra.model.PharmacySearch;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -63,6 +64,33 @@ public class ApiExtraController {
         }
 
         return ResponseResult.success(jsonResult);
+    }
+
+    // Q89
+    @GetMapping("/api/extra/air")
+    public String air(@RequestBody AirInput airInput) {
+
+        String apiKey = "";
+        String url = "http://openapi.airkorea.or.kr/openapi/services/rest/ArpltnInforInqireSvc/getCtprvnRltmMesureDnsty?serviceKey=%s&pageNo=1&numOfRows=10&sidoName=%s";
+
+        String apiResult = "";
+
+        try {
+            URI uri = new URI(String.format(url, apiKey, URLEncoder.encode(airInput.getSearchSido(), "UTF-8")));
+
+            RestTemplate restTemplate = new RestTemplate();
+            HttpHeaders headers = new HttpHeaders();
+            headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+
+            String result = restTemplate.getForObject(uri, String.class);
+
+            apiResult = result;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return apiResult;
     }
 
 }
