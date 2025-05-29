@@ -213,4 +213,11 @@ public class ApiBoardNoticeController {
         return ResponseResult.success(board);
     }
 
+    // Q92
+    @GetMapping("/api/board")
+    public ResponseEntity<?> list() {
+        List<Board> list = boardService.list();
+        return ResponseResult.success(list);
+    }
+
 }
